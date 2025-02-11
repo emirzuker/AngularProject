@@ -1,17 +1,23 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';  // <-- Import FormsModule
+import { FormsModule } from '@angular/forms';  
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { ResidencesComponent } from './residences/residences.component';
+import { ResidenceDetailComponent } from './residence-detail/residence-detail.component';
+import { HomeComponent } from './home/home.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    ResidencesComponent
+    ResidencesComponent,
+    ResidenceDetailComponent,
+    HomeComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,

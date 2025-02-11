@@ -40,10 +40,9 @@ export class ResidencesComponent {
     return this.favorites.includes(res);
   }
 
-  // Method to filter residences by address based on search query
   filterResidences() {
     if (this.searchQuery.trim() === '') {
-      this.filteredResidences = this.listResidences;  // Show all if no search query
+      this.filteredResidences = this.listResidences;  
     } else {
       this.filteredResidences = this.listResidences.filter(res =>
         res.address.toLowerCase().includes(this.searchQuery.toLowerCase())

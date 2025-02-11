@@ -1,46 +1,94 @@
 <h1 class="text-center my-4 text-primary fw-bold">Listes des Résidences</h1>
 
-<!-- Search Input -->
-<input type="text" class="form-control w-50 mx-auto mb-4" placeholder="Rechercher par adresse" [(ngModel)]="searchQuery" (input)="filterResidences()">
+<input
+  type="text"
+  class="form-control w-50 mx-auto mb-4"
+  placeholder="Rechercher par adresse"
+  [(ngModel)]="searchQuery"
+  (input)="filterResidences()"
+/>
 
 <div class="d-flex flex-wrap justify-content-center gap-4">
-  <div *ngFor="let res of filteredResidences" class="card shadow-lg p-3 border-0" style="width: 20rem; border-radius: 15px;">
-    <img [src]="res.image" class="card-img-top rounded-top" alt="Residence Image" style="height: 200px; object-fit: cover;">
-    
+  <div
+    *ngFor="let res of filteredResidences"
+    class="card shadow-lg p-3 border-0"
+    style="width: 20rem; border-radius: 15px"
+  >
+    <img
+      [src]="res.image"
+      class="card-img-top rounded-top"
+      alt="Residence Image"
+      style="height: 200px; object-fit: cover"
+    />
+
     <div class="card-body text-center">
       <h5 class="card-title text-dark fw-bold">{{ res.name }}</h5>
 
-      <!-- Status Icons with Conditional Display -->
       <div class="status-icons">
-        <img *ngIf="res.status === 'Disponible'" src="assets/images/checked.png" alt="Available" style="width: 20px; height: 20px;">
-        <img *ngIf="res.status === 'En Construction'" src="assets/images/warning.png" alt="Under Construction" style="width: 20px; height: 20px;">
-        <img *ngIf="res.status === 'Vendu'" src="assets/images/alert.png" alt="Sold" style="width: 20px; height: 20px;">
+        <img
+          *ngIf="res.status === 'Disponible'"
+          src="assets/images/checked.png"
+          alt="Available"
+          style="width: 20px; height: 20px"
+        />
+        <img
+          *ngIf="res.status === 'En Construction'"
+          src="assets/images/warning.png"
+          alt="Under Construction"
+          style="width: 20px; height: 20px"
+        />
+        <img
+          *ngIf="res.status === 'Vendu'"
+          src="assets/images/alert.png"
+          alt="Sold"
+          style="width: 20px; height: 20px"
+        />
       </div>
-      
+
       <!-- Address Display -->
       <h5 *ngIf="res.address !== 'inconnu'" class="text-muted">
         📍 {{ res.address }}
       </h5>
 
       <!-- Show Location Button -->
-      <a href="#" class="btn btn-primary mt-2 px-4 py-2 fw-bold" 
-         (click)="showLocation(res.address)"
-         style="transition: all 0.3s ease;">
+      <a
+        href="#"
+        class="btn btn-primary mt-2 px-4 py-2 fw-bold"
+        (click)="showLocation(res.address)"
+        style="transition: all 0.3s ease"
+      >
         Show Location
       </a>
+      <a
+        [routerLink]="['/details',res.id]"
+        class="btn btn-primary mt-2 px-4 py-2 fw-bold"
+        style="transition: all 0.3s ease"
+      >
+        Details
+      </a>
+            <!-- routerLink = "/detail/{{res.id}}" -->
+
 
       <!-- Like Button -->
-      <button class="btn mt-2" 
-              [ngClass]="isFavorite(res) ? 'btn-danger' : 'btn-outline-danger'" 
-              (click)="toggleFavorite(res)">
-        <i class="bi" [ngClass]="isFavorite(res) ? 'bi-heart-fill' : 'bi-heart'"></i>
-        {{ isFavorite(res) ? 'Unfavorite' : 'Like' }}
+      <button
+        class="btn mt-2"
+        [ngClass]="isFavorite(res) ? 'btn-danger' : 'btn-outline-danger'"
+        (click)="toggleFavorite(res)"
+      >
+        <i
+          class="bi"
+          [ngClass]="isFavorite(res) ? 'bi-heart-fill' : 'bi-heart'"
+        ></i>
+        {{ isFavorite(res) ? "Unfavorite" : "Like" }}
       </button>
     </div>
   </div>
-  
+
   <!-- Selected Address Display -->
-  <div class="text-center mt-4 p-3 bg-light shadow-sm rounded" style="width: 50%; margin: 0 auto;">
+  <div
+    class="text-center mt-4 p-3 bg-light shadow-sm rounded"
+    style="width: 50%; margin: 0 auto"
+  >
     <h2 class="text-secondary fw-bold">📍 Selected Address:</h2>
     <h3 class="text-primary">{{ address }}</h3>
   </div>
