@@ -1,0 +1,112 @@
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+      <h2 class="text-center mb-4">Add Apartment</h2>
+      <form [formGroup]="apartmentForm" (ngSubmit)="onSubmit()">
+        <!-- Apartment Number -->
+        <div class="mb-3">
+          <label for="apartmentNumber" class="form-label">Apartment Number</label>
+          <input
+            type="text"
+            class="form-control"
+            id="apartmentNumber"
+            formControlName="apartmentNumber"
+            placeholder="Enter Apartment Number"
+          />
+          <div *ngIf="apartmentForm.get('apartmentNumber')?.invalid && apartmentForm.get('apartmentNumber')?.touched" class="text-danger">
+            Apartment Number must be a number.
+          </div>
+        </div>
+  
+        <!-- Floor Number -->
+        <div class="mb-3">
+          <label for="floorNumber" class="form-label">Floor Number</label>
+          <input
+            type="text"
+            class="form-control"
+            id="floorNumber"
+            formControlName="floorNumber"
+            placeholder="Enter Floor Number"
+          />
+          <div *ngIf="apartmentForm.get('floorNumber')?.invalid && apartmentForm.get('floorNumber')?.touched" class="text-danger">
+            Floor Number must be a number.
+          </div>
+        </div>
+  
+        <!-- Surface -->
+        <div class="mb-3">
+          <label for="surface" class="form-label">Surface</label>
+          <input
+            type="text"
+            class="form-control"
+            id="surface"
+            formControlName="surface"
+            placeholder="Enter Surface"
+          />
+          <div *ngIf="apartmentForm.get('surface')?.invalid && apartmentForm.get('surface')?.touched" class="text-danger">
+            Surface is required.
+          </div>
+        </div>
+  
+        <!-- Terrace -->
+        <div class="mb-3">
+          <label>Terrace</label>
+          <input type="checkbox" formControlName="terraceYes" id="terraceYes" />
+          <label for="terraceYes">Yes</label>
+          <input type="checkbox" formControlName="terraceNo" id="terraceNo" />
+          <label for="terraceNo">No</label>
+          <div *ngIf="apartmentForm.get('terraceYes')?.invalid && apartmentForm.get('terraceYes')?.touched" class="text-danger">
+            Terrace selection is required.
+          </div>
+        </div>
+  
+        <div *ngIf="apartmentForm.get('terraceYes')?.value" class="mb-3">
+          <label for="surfaceTerrace" class="form-label">Surface Terrace</label>
+          <input
+            type="text"
+            class="form-control"
+            id="surfaceTerrace"
+            formControlName="surfaceTerrace"
+            placeholder="Enter Surface Terrace"
+          />
+          <div *ngIf="apartmentForm.get('surfaceTerrace')?.invalid && apartmentForm.get('surfaceTerrace')?.touched" class="text-danger">
+            Surface Terrace is required if Terrace is selected.
+          </div>
+        </div>
+  
+        <!-- Category -->
+        <div class="mb-3">
+          <label>Category</label>
+          <div class="category-group">
+            <input type="radio" id="categoryS1" formControlName="category" value="S+1" />
+            <label for="categoryS1">S+1</label>
+            <input type="radio" id="categoryS2" formControlName="category" value="S+2" />
+            <label for="categoryS2">S+2</label>
+            <input type="radio" id="categoryS3" formControlName="category" value="S+3" />
+            <label for="categoryS3">S+3</label>
+          </div>
+          <div *ngIf="apartmentForm.get('category')?.invalid && apartmentForm.get('category')?.touched" class="text-danger">
+            Category is required.
+          </div>
+        </div>
+  
+        <!-- Residence -->
+        <div class="mb-3">
+          <label for="residence" class="form-label">Residence</label>
+          <select formControlName="residence" class="form-control" id="residence">
+            <option value="add">Add</option>
+            <option value="reset">Reset</option>
+          </select>
+          <div *ngIf="apartmentForm.get('residence')?.invalid && apartmentForm.get('residence')?.touched" class="text-danger">
+            Residence selection is required.
+          </div>
+        </div>
+  
+        <div class="form-buttons">
+          <button type="submit" class="btn btn-primary w-100" [disabled]="apartmentForm.invalid">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
