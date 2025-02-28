@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Residence } from '../CORE/model/residence';
+import { ResidenceService } from '../residence.service';
 
 @Component({
   selector: 'app-residences',
@@ -7,17 +8,14 @@ import { Residence } from '../CORE/model/residence';
   styleUrls: ['./residences.component.css']
 })
 export class ResidencesComponent {
-  listResidences: Residence[] = [
-    { id: 1, name: "El fel", address: "Borj Cedria", image: "../../assets/images/R2.jpg", status: "Disponible" },
-    { id: 2, name: "El yasmine", address: "Ezzahra", image: "../../assets/images/R2.jpg", status: "Disponible" },
-    { id: 3, name: "El Arij", address: "Rades", image: "../../assets/images/R3.jpg", status: "Vendu" },
-    { id: 4, name: "El Anber", address: "inconnu", image: "../../assets/images/R4.jpg", status: "En Construction" }
-  ];
+
+
+  constructor (private rs:ResidenceService) { }
 
   address: string | undefined;
   favorites: Residence[] = [];
-  searchQuery: string = '';  // Property for the search query
-  filteredResidences: Residence[] = this.listResidences;  // Property to hold the filtered list
+  searchQuery: string = '';  
+  filteredResidences: Residence[] = this.rs.getlist();  
 
   showLocation(address: string) {
     if (address === 'inconnu') {
@@ -42,9 +40,9 @@ export class ResidencesComponent {
 
   filterResidences() {
     if (this.searchQuery.trim() === '') {
-      this.filteredResidences = this.listResidences;  
+      this.filteredResidences = this.rs.getlist();  
     } else {
-      this.filteredResidences = this.listResidences.filter(res =>
+      this.filteredResidences = this.rs.getlist().filter(res =>
         res.address.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
     }
